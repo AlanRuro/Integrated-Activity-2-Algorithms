@@ -6,10 +6,16 @@ void make_set(int); // O(1)
 int find_set(int); // O(lg n)
 void union_sets(int, int); // O(n)
 int** createWeightMatrix(int);
+template <class T> T* createEmptyArray(int);
 pair<pair<int,int>, int>* getEdges(int, int, int**);
+
 int Kruskal(int**, int, int);
 void mergeSort(pair<pair<int,int>, int>*, int, int); // O(n lg n)
 void merge(pair<pair<int,int>, int>*, int, int, int);
+
+pair<int*, int> nearestNeighbour(int**, int, int);
+int findMin(int*, bool*, int);
+pair<int*, int> repeatitiveNearestNeighbour(int**, int);
 
 const int N = 1e5 + 5;
 int parent[N];
@@ -21,9 +27,19 @@ int main() {
     cout << "Number of neighborhoods";
     cin >> numNeighborhoods;
 
+    cout << endl;
+
     int** distances = createWeightMatrix(numNeighborhoods);
     int numEdges = (numNeighborhoods * (numNeighborhoods - 1)) / 2;
-    cout << Kruskal(distances, numNeighborhoods, numEdges) << endl;
+    cout << "Kruskal:" << Kruskal(distances, numNeighborhoods, numEdges) << endl;
+
+    pair<int*, int> shortestPath = repeatitiveNearestNeighbour(distances, numNeighborhoods);
+    for (int i = 0; i < numNeighborhoods+1; i++) {
+        cout << shortestPath.first[i] << "->";
+    }
+    cout << endl;
+    cout << "RNN: " << shortestPath.second << endl;
+
     int** dataFlowCapacities = createWeightMatrix(numNeighborhoods);
 
     return 0;
@@ -62,6 +78,15 @@ int** createWeightMatrix(int n) {
     return weightMatrix;
 }
 
+template <class T>
+T* createEmptyArray(int n) {
+    T *array = new T[n];
+    for(int i = 0; i < n; i++) {
+        array[i] = 0;
+    }
+    return array;
+}
+
 pair<pair<int,int>, int>* getEdges(int numVertices, int numEdges, int** weightMatrix) {
     pair<pair<int,int>, int>* edges = new pair<pair<int,int>, int>[numEdges];
     int k = 0;
@@ -85,7 +110,6 @@ void mergeSort(pair<pair<int,int>, int>* array, int p, int r) {
 void merge(pair<pair<int,int>, int>* array, int p, int q, int r) {
     int nL = q - p + 1;
     int nR = r - q;
-    cout << "nL: " << nL << endl;
     pair<pair<int, int>, int> *L = new pair<pair<int, int>, int>[nL];
     pair<pair<int, int>, int> *R = new pair<pair<int, int>, int>[nR];
     for (int i = 0; i < nL; i++) {
@@ -143,8 +167,62 @@ int Kruskal(int** weightMatrix, int numVertices, int numEdges) {
         if (find_set(u) != find_set(v)) {
             cost += w;
             union_sets(u, v);
+            cout << u << "->" << v << endl;
         }
     }
 
     return cost;
+}
+
+int findMin(int* array, bool* visited, int n) {
+    int min = INT_MAX;
+    int nearest = 0;
+    for(int i = 0; i < n; i++) {
+        if (visited[i] == true || array[i] == 0) continue;
+        if (array[i] < min) {
+            min = array[i];
+            nearest = i;
+        } 
+    }
+    return nearest;
+}
+
+pair<int*, int> nearestNeighbour(int** distances, int numNodes, int startNode) {
+    int currentNode = startNode;
+    bool* visited = createEmptyArray<bool>(numNodes);
+    visited[currentNode] = 1;
+    int countVisited = 1;
+    float shortestDistance = 0;
+
+    pair<int*, int> path;
+    path.first = new int[numNodes+1];
+    path.first[0] = startNode;
+
+    int i = 1;
+
+    while(countVisited < numNodes) {
+        int nearestNode = findMin(distances[currentNode], visited, numNodes);
+        shortestDistance += distances[currentNode][nearestNode];
+        currentNode = nearestNode;
+        visited[currentNode] = 1;
+        path.first[i] = currentNode;
+        countVisited++;
+        i++;
+    }
+    path.first[numNodes] = startNode;
+    path.second = shortestDistance + distances[currentNode][startNode];
+    return path;
+}
+
+pair<int*, int> repeatitiveNearestNeighbour(int** distances, int n) {
+    int minimumDistance = INT_MAX;
+    pair<int*, int> minimumPath;
+    for(int i = 0; i < n; i++) {
+        pair<int*, int> path = nearestNeighbour(distances, n, i);
+        if(path.second < minimumDistance){
+            minimumPath = path;
+            minimumDistance = path.second;
+        } 
+    }
+    return minimumPath;
 }
