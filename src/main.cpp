@@ -6,7 +6,7 @@ void make_set(int); // O(1)
 int find_set(int); // O(lg n)
 void union_sets(int, int); // O(n)
 int** createWeightMatrix(int);
-pair<pair<int,int>, int>* getEdges(int, int**);
+pair<pair<int,int>, int>* getEdges(int, int, int**);
 int Kruskal(int**, int, int);
 void mergeSort(pair<pair<int,int>, int>*, int, int); // O(n lg n)
 void merge(pair<pair<int,int>, int>*, int, int, int);
@@ -62,17 +62,30 @@ int** createWeightMatrix(int n) {
     return weightMatrix;
 }
 
-pair<pair<int,int>, int>* getEdges(int numEdges, int** weightMatrix) {
+pair<pair<int,int>, int>* getEdges(int numVertices, int numEdges, int** weightMatrix) {
     pair<pair<int,int>, int>* edges = new pair<pair<int,int>, int>[numEdges];
     int k = 0;
-    for (int i = 0; i < numEdges - 1; i++) {
-        for (int j = i + 1; j < numEdges; j++) {
+    for (int i = 0; i < numVertices - 1; i++) {
+        for (int j = i + 1; j < numVertices; j++) {
             edges[k] = {{i, j}, weightMatrix[i][j]};
             k++;
         }
     }
     return edges;
 }
+// pair<pair<int,int>, int>* getEdges(int numVertices, int** weightMatrix) {
+//     int numEdges = (numVertices * (numVertices - 1)) / 2;
+//     pair<pair<int,int>, int>* edges = new pair<pair<int,int>, int>[numEdges];
+//     int k = 0;
+//     for (int i = 0; i < numVertices - 1; i++) {
+//         for (int j = i + 1; j < numVertices; j++) {
+//             edges[k] = {{i, j}, weightMatrix[i][j]};
+//             k++;
+//         }
+//     }
+//     return edges;
+// }
+
 
 void mergeSort(pair<pair<int,int>, int>* array, int p, int r) {
     if (p >= r) return;
@@ -85,6 +98,7 @@ void mergeSort(pair<pair<int,int>, int>* array, int p, int r) {
 void merge(pair<pair<int,int>, int>* array, int p, int q, int r) {
     int nL = q - p + 1;
     int nR = r - q;
+    cout << "nL: " << nL << endl;
     pair<pair<int, int>, int> *L = new pair<pair<int, int>, int>[nL];
     pair<pair<int, int>, int> *R = new pair<pair<int, int>, int>[nR];
     for (int i = 0; i < nL; i++) {
@@ -130,7 +144,7 @@ int Kruskal(int** weightMatrix, int numVertices, int numEdges) {
 
     int cost = 0;
 
-    pair<pair<int, int>, int> *edges = getEdges(numVertices, weightMatrix);
+    pair<pair<int, int>, int> *edges = getEdges(numVertices, numEdges, weightMatrix);
 
     mergeSort(edges, 0, numEdges-1);
 
