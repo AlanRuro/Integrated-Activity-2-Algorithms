@@ -73,19 +73,6 @@ pair<pair<int,int>, int>* getEdges(int numVertices, int numEdges, int** weightMa
     }
     return edges;
 }
-// pair<pair<int,int>, int>* getEdges(int numVertices, int** weightMatrix) {
-//     int numEdges = (numVertices * (numVertices - 1)) / 2;
-//     pair<pair<int,int>, int>* edges = new pair<pair<int,int>, int>[numEdges];
-//     int k = 0;
-//     for (int i = 0; i < numVertices - 1; i++) {
-//         for (int j = i + 1; j < numVertices; j++) {
-//             edges[k] = {{i, j}, weightMatrix[i][j]};
-//             k++;
-//         }
-//     }
-//     return edges;
-// }
-
 
 void mergeSort(pair<pair<int,int>, int>* array, int p, int r) {
     if (p >= r) return;
