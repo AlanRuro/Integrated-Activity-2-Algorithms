@@ -17,6 +17,7 @@ void merge(pair<pair<int,int>, int>*, int, int, int);
 pair<int*, int> nearestNeighbour(int**, int, int);
 int findMin(int*, bool*, int);
 pair<int*, int> repeatitiveNearestNeighbour(int**, int);
+void printArray(int*, int);
 
 const int N = 1e5 + 5;
 int parent[N];
@@ -32,12 +33,13 @@ int main() {
 
     int** distances = createWeightMatrix(numNeighborhoods);
     int numEdges = (numNeighborhoods * (numNeighborhoods - 1)) / 2;
-    cout << "Kruskal:" << Kruskal(distances, numNeighborhoods, numEdges) << endl;
+    cout << "Kruskal: " << Kruskal(distances, numNeighborhoods, numEdges) << endl;
 
     pair<int*, int> shortestPath = repeatitiveNearestNeighbour(distances, numNeighborhoods);
-    for (int i = 0; i < numNeighborhoods+1; i++) {
-        cout << shortestPath.first[i] << "->";
-    }
+    // for (int i = 0; i < numNeighborhoods+1; i++) {
+    //     cout << shortestPath.first[i] << "->";
+    // }
+    printArray(shortestPath.first, numNeighborhoods+1);
     cout << endl;
     cout << "RNN: " << shortestPath.second << endl;
 
@@ -226,4 +228,11 @@ pair<int*, int> repeatitiveNearestNeighbour(int** distances, int n) {
         } 
     }
     return minimumPath;
+}
+
+void printArray(int* array, int n) {
+    for(int i = 0; i < n-1; i++) {
+        cout << array[i] << "->";
+    }
+    cout << array[n-1];
 }
