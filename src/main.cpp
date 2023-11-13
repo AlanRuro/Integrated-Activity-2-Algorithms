@@ -11,14 +11,17 @@ int** createWeightMatrix(int);
 int main() {
     
     int numNeighborhoods;
-    cout << "Number of neighborhoods";
+    // cout << "Number of neighborhoods";
     cin >> numNeighborhoods;
 
-    cout << endl;
+    // cout << endl;
+    cout << "1. Way of wiring the neighborhoods with fiber: " << endl;
 
     int** distances = createWeightMatrix(numNeighborhoods);
     int numEdges = (numNeighborhoods * (numNeighborhoods - 1)) / 2;
     cout << "Kruskal: " << Kruskal(distances, numNeighborhoods, numEdges) << endl;
+
+    cout << "2. Route to be followed by the mail delivery personnel: " << endl;
 
     pair<int*, int> shortestPath = repeatitiveNearestNeighbour(distances, numNeighborhoods);
     printArray(shortestPath.first, numNeighborhoods+1);

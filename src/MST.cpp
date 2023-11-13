@@ -1,5 +1,7 @@
 #include "mst.h"
 
+int FIRST_ASCII_VALUE = 65;
+
 const int N = 1e5 + 5;
 int parent[N];
 int sz[N];
@@ -106,7 +108,7 @@ int Kruskal(int** weightMatrix, int numVertices, int numEdges) {
         if (find_set(u) != find_set(v)) {
             cost += w;
             union_sets(u, v);
-            std::cout << u << "->" << v << std::endl;
+            std::cout << "(" << static_cast<char>(u + FIRST_ASCII_VALUE) << "," << static_cast<char>(v + FIRST_ASCII_VALUE) << ")" << std::endl;
         }
     }
 
