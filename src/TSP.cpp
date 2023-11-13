@@ -1,4 +1,4 @@
-#include "TSP.h"
+#include "tsp.h"
 
 template <class T>
 T* createEmptyArray(int n) {

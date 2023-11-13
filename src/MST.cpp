@@ -1,4 +1,4 @@
-#include "MST.h"
+#include "mst.h"
 
 const int N = 1e5 + 5;
 int parent[N];

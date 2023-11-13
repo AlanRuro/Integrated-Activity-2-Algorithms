@@ -1,7 +1,7 @@
 #include <iostream>
 #include <limits.h>
-#include "MST.h"
-#include "TSP.h"
+#include "mst.h"
+#include "tsp.h"
 
 using namespace std;
 
