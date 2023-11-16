@@ -23,21 +23,23 @@ int findMin(int* array, bool* visited, int n) {
 }
 
 
-std::pair<int*, int> nearestNeighbour(int** distances, int numNodes, int startNode) {
+std::pair<int*, int> nearestNeighbour(Graph graph, int startNode) {
     int currentNode = startNode;
-    bool* visited = createEmptyArray<bool>(numNodes);
+    bool* visited = createEmptyArray<bool>(graph.getNumVertices());
     visited[currentNode] = 1;
     int countVisited = 1;
     float shortestDistance = 0;
 
     std::pair<int*, int> path;
-    path.first = new int[numNodes+1];
+    path.first = new int[graph.getNumVertices()+1];
     path.first[0] = startNode;
+
+    int** distances = graph.getWeightMatrix();
 
     int i = 1;
 
-    while(countVisited < numNodes) {
-        int nearestNode = findMin(distances[currentNode], visited, numNodes);
+    while(countVisited < graph.getNumVertices()) {
+        int nearestNode = findMin(distances[currentNode], visited, graph.getNumVertices());
         shortestDistance += distances[currentNode][nearestNode];
         currentNode = nearestNode;
         visited[currentNode] = 1;
@@ -45,16 +47,16 @@ std::pair<int*, int> nearestNeighbour(int** distances, int numNodes, int startNo
         countVisited++;
         i++;
     }
-    path.first[numNodes] = startNode;
+    path.first[graph.getNumVertices()] = startNode;
     path.second = shortestDistance + distances[currentNode][startNode];
     return path;
 }
 
-std::pair<int*, int> repeatitiveNearestNeighbour(int** distances, int n) {
+std::pair<int*, int> repeatitiveNearestNeighbour(Graph graph) {
     int minimumDistance = INT_MAX;
     std::pair<int*, int> minimumPath;
-    for(int i = 0; i < n; i++) {
-        std::pair<int*, int> path = nearestNeighbour(distances, n, i);
+    for(int i = 0; i < graph.getNumVertices(); i++) {
+        std::pair<int*, int> path = nearestNeighbour(graph, i);
         if(path.second < minimumDistance){
             minimumPath = path;
             minimumDistance = path.second;

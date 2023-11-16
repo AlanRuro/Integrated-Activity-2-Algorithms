@@ -28,19 +28,7 @@ void union_sets(int a, int b) {
     }
 }
 
-std::pair<std::pair<int,int>, int>* getEdges(int numVertices, int numEdges, int** weightMatrix) {
-    std::pair<std::pair<int,int>, int>* edges = new std::pair<std::pair<int,int>, int>[numEdges];
-    int k = 0;
-    for (int i = 0; i < numVertices - 1; i++) {
-        for (int j = i + 1; j < numVertices; j++) {
-            edges[k] = {{i, j}, weightMatrix[i][j]};
-            k++;
-        }
-    }
-    return edges;
-}
-
-void mergeSort(std::pair<std::pair<int,int>, int>* array, int p, int r) {
+void mergeSort(std::pair<std::pair<int, int>, int>* array, int p, int r) {
     if (p >= r) return;
     int q = (p  + r) / 2;
     mergeSort(array, p, q);
@@ -48,7 +36,7 @@ void mergeSort(std::pair<std::pair<int,int>, int>* array, int p, int r) {
     merge(array, p, q, r);
 }
 
-void merge(std::pair<std::pair<int,int>, int>* array, int p, int q, int r) {
+void merge(std::pair<std::pair<int, int>, int>* array, int p, int q, int r) {
     int nL = q - p + 1;
     int nR = r - q;
     std::pair<std::pair<int, int>, int> *L = new std::pair<std::pair<int, int>, int>[nL];
@@ -89,18 +77,19 @@ void merge(std::pair<std::pair<int,int>, int>* array, int p, int q, int r) {
     delete[] R;
 }
 
-int Kruskal(int** weightMatrix, int numVertices, int numEdges) {
-    for (int i = 0; i < numVertices; i++) {
+int Kruskal(Graph graph) {
+    for (int i = 0; i < graph.getNumVertices(); i++) {
         make_set(i);
     }
 
     int cost = 0;
 
-    std::pair<std::pair<int, int>, int> *edges = getEdges(numVertices, numEdges, weightMatrix);
+    std::pair<std::pair<int, int>, int>* edges = graph.getEdges();
 
-    mergeSort(edges, 0, numEdges-1);
 
-    for (int i = 0; i < numEdges; i++) {
+    mergeSort(edges, 0, graph.getNumEdges()-1);
+
+    for (int i = 0; i < graph.getNumEdges(); i++) {
         int u = edges[i].first.first;
         int v = edges[i].first.second;
         int w = edges[i].second;
