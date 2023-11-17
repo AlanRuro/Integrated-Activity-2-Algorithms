@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <limits.h>
-#include "Graph.h"
+#include "../Graph.h"
 
 
 std::pair<int*, int> nearestNeighbour(Graph, int);

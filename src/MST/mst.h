@@ -2,7 +2,7 @@
 #define MST_H
 
 #include <iostream>
-#include "Graph.h"
+#include "../Graph.h"
 
 void make_set(int); // O(1)
 int find_set(int); // O(lg n)
