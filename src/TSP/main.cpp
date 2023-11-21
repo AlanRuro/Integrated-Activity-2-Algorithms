@@ -10,18 +10,19 @@ void printArray(int*, int);
 int main() {
     
     int numNeighborhoods;
-    // cout << "Number of neighborhoods";
+
     cin >> numNeighborhoods;
 
-    // cout << endl;
 
     Graph city = Graph(numNeighborhoods);
 
     cout << "2. Route to be followed by the mail delivery personnel: " << endl;
 
     pair<int*, int> shortestPath = repeatitiveNearestNeighbour(city);
+
     printArray(shortestPath.first, numNeighborhoods+1);
     cout << endl;
+
     cout << "RNN: " << shortestPath.second << endl;
 
     return 0;
