@@ -1,8 +1,8 @@
 #include <iostream>
 #include <limits.h>
 #include "Graph.h"
-#include "mst.h"
-#include "tsp.h"
+#include "MST/mst.h"
+#include "TSP/tsp.h"
 
 using namespace std;
 
@@ -11,10 +11,7 @@ void printArray(int*, int);
 int main() {
     
     int numNeighborhoods;
-    // cout << "Number of neighborhoods";
     cin >> numNeighborhoods;
-
-    // cout << endl;
 
     Graph city = Graph(numNeighborhoods);
     cout << "1. Way of wiring the neighborhoods with fiber: " << endl;

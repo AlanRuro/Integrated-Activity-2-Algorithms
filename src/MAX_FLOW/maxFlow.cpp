@@ -1,4 +1,4 @@
-#include "max_flow.h"
+#include "maxFlow.h"
 
 int EdmondsKarp(Graph graph, int s, int t){
 
