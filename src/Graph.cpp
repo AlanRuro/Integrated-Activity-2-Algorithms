@@ -4,10 +4,15 @@
 Graph::Graph(int numVertices) {
     this->numVertices = numVertices;
     this->numEdges = (numVertices * (numVertices - 1)) / 2;
-    fillGraph();
+    initialize();
 }
 
-void Graph::fillGraph() {
+void Graph::initialize() {
+    resetWeightMatrix();  
+    fillEdges();
+}
+
+void Graph::fillFromInput() {
     fillWeightMatrix();
     fillEdges();
 }
@@ -18,6 +23,16 @@ void Graph::fillWeightMatrix() {
         weightMatrix[i] = new int[this->numVertices];
         for (int j = 0; j < this->numVertices; j++) {
             std::cin >> this->weightMatrix[i][j];
+        }
+    }
+}
+
+void Graph::resetWeightMatrix() {
+    this->weightMatrix = new int*[this->numVertices];
+    for (int i = 0; i < this->numVertices; i++) {
+        weightMatrix[i] = new int[this->numVertices];
+        for (int j = 0; j < this->numVertices; j++) {
+            this->weightMatrix[i][j] = 0;
         }
     }
 }

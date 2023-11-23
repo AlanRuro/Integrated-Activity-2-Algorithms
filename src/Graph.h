@@ -13,9 +13,11 @@ class Graph {
 
     public:
         Graph(int);
-        void fillGraph();
+        void initialize();
+        void fillFromInput();
         void fillEdges();
         void fillWeightMatrix();
+        void resetWeightMatrix();
         int getNumVertices();
         int getNumEdges();
         int** getWeightMatrix();

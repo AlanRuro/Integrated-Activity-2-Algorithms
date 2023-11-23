@@ -14,6 +14,7 @@ int main() {
     cin >> numNeighborhoods;
 
     Graph city = Graph(numNeighborhoods);
+    city.fillFromInput();
     cout << "1. Way of wiring the neighborhoods with fiber: " << endl;
 
     cout << "Kruskal: " << Kruskal(city) << endl;
