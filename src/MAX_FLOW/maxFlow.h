@@ -3,10 +3,17 @@
 
 #include <iostream>
 #include <limits.h>
+#include <vector>
+#include <algorithm>
 #include "../Graph.h"
 
 
 int EdmondsKarp(Graph, int, int);
-void BFS(Graph, int, int, int*); // O(V(E*E))
+std::vector<int> BFS(Graph, int, int); // O(V(E*E))
+int findMinResidualCapacity(std::vector<int>, Graph);
+void updateResidualGraph(Graph, Graph&, int**);
+
+template <class T> T* emptyArray(int);
+template <class T> T** emptyMatrix(int, int);
 
 #endif
