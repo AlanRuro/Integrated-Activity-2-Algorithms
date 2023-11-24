@@ -19,8 +19,6 @@ int main() {
     cout << endl;
     cout << "RNN: " << shortestPath.second << endl;
 
-    Graph network = Graph(numNeighborhoods);
-
     return 0;
 }
 

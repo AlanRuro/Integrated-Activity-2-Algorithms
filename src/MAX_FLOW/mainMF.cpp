@@ -14,6 +14,9 @@ int main() {
     cin >> numNeighborhoods;
 
     Graph network = Graph(numNeighborhoods);
+    network.fillFromInput();
+
+    cout << EdmondsKarp(network, 0, 3) << endl;
 
     return 0;
 }
