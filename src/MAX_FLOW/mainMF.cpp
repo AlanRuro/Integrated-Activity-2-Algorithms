@@ -16,7 +16,10 @@ int main() {
     Graph network = Graph(numNeighborhoods);
     network.fillFromInput();
 
-    cout << EdmondsKarp(network, 0, 3) << endl;
+    int source = 0;
+    int sink = 3;
+
+    cout << "Maximum flow from source " << source << " to sink " << sink << " is " << EdmondsKarp(network, source, sink) << endl;
 
     return 0;
 }
