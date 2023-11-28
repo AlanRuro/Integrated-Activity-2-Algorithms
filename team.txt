@@ -1,0 +1,15 @@
+Authors:
+Gerardo Ulises Sanchez Felix - A01641788
+Alan Antonio Ruelas Robles - A01641426
+
+Date:
+11/28/2023
+
+Specific parts of the project we worked on:
+- Gerardo: MST implementation using Kruskal's algorithm, implementation of BFS search in Edmons Karp's algorithm, 
+and we both worked on the structure of the project and the report. 
+- Alan: TSP implementation using the nearest neighbor algorithm, Edmons Karp's algorithm implementation and voronoi
+diagram implementation.
+
+We both worked on every part of the project, but in general we can resume it as the parts mentioned above.
+
