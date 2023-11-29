@@ -13,15 +13,15 @@ class Graph {
 
     public:
         Graph(int);
-        void initialize();
-        void fillFromInput();
-        void fillEdges();
-        void fillWeightMatrix();
-        void resetWeightMatrix();
-        int getNumVertices();
-        int getNumEdges();
-        int** getWeightMatrix();
-        std::pair<std::pair<int, int>, int>* getEdges();
+        void initialize(); // O(n^2)
+        void fillFromInput(); // O(n^2)
+        void fillEdges(); // O(n^2)
+        void fillWeightMatrix(); // O(n^2)
+        void resetWeightMatrix(); // O(n^2)
+        int getNumVertices();// O(1)
+        int getNumEdges(); // O(1)
+        int** getWeightMatrix(); // O(1)
+        std::pair<std::pair<int, int>, int>* getEdges(); // O(1)
 };
 
 #endif
