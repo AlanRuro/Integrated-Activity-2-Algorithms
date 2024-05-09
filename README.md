@@ -51,3 +51,7 @@ For compilation:
 ```
 $ cmake -DCMAKE_BUILD_TYPE=Release .
 ```
+
+## Explanation video
+
+https://youtu.be/-d2fR75yyDk
